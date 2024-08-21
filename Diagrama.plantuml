@@ -1,0 +1,49 @@
+@startuml
+class Proyecto {
+    -codigo: String
+    -nombre: String
+}
+
+class JefeDeProyecto {
+    -codigo: String
+    -nombre: String
+    -direccion: String
+    -telefono: String
+}
+
+class Plano {
+    -numeroIdentificacion: String
+    -fechaEntrega: Date
+    -numeroFiguras: int
+    -dibujo: String
+}
+
+abstract class Figura {
+    -identificador: String
+    -nombre: String
+    -color: String
+    +area(): float
+    +perimetro(): float
+}
+
+class Poligono {
+    -numeroLineas: int
+    +perimetro(): float
+}
+
+class Linea {
+    -identificador: String
+    -origenX: float
+    -origenY: float
+    -finX: float
+    -finY: float
+    +longitud(): float
+}
+
+Proyecto "1" -- "1" JefeDeProyecto : 
+Proyecto "1" o-- "*" Plano : 
+Plano "1" o-- "*" Figura : 
+Figura <|-- Poligono
+Poligono "1" o-- "*" Linea : 
+Linea "0..*" --> "1" Figura : 
+@enduml
